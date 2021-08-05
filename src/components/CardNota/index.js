@@ -1,3 +1,3 @@
-import CardNotes from "./CardNotes";
+import CardNota from "./CardNota"
 
-export default CardNotes
+export default CardNota;
