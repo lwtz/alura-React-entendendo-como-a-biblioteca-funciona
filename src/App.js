@@ -1,25 +1,20 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import ListNotes from "./components/ListNotes";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+
+        <section>
+            <form action="">
+                <input type="text" placeholder={'Titulo'} />
+                <textarea cols="30" rows="10" placeholder={'Digite aqui'} />
+                <button>Criar Nota</button>
+            </form>
+            {/* Aqui ele pega o component criado*/}
+            <ListNotes />
+        </section>
+    );
 }
 
 export default App;
