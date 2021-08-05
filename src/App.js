@@ -1,7 +1,12 @@
 // import logo from './logo.svg';
-import './App.css';
-import ListNotes from "./components/ListNotes";
-import FormCadastro from "./components/FormCadastro";
+import './assets/App.css';
+/*
+Por padrão o arquivo index.js é arquivo padrão de dentro de uma pasta.
+Então quando vai importar, por exemplo o ListNotes, nao precisa passar o caminho completo.
+Ele vai buscar o Index.js que esta configurado somente para importar e exportar aquele componente
+ */
+import ListNotes from "./components/List-notes";
+import FormCadastro from "./components/Fom-cadastro";
 import { Component } from "react";
 
 class App extends Component {
