@@ -1,20 +1,19 @@
 // import logo from './logo.svg';
 import './App.css';
 import ListNotes from "./components/ListNotes";
+import FormCadastro from "./components/FormCadastro";
+import { Component } from "react";
 
-function App() {
-    return (
-
-        <section>
-            <form action="">
-                <input type="text" placeholder={'Titulo'} />
-                <textarea cols="30" rows="10" placeholder={'Digite aqui'} />
-                <button>Criar Nota</button>
-            </form>
-            {/* Aqui ele pega o component criado*/}
-            <ListNotes />
-        </section>
-    );
+class App extends Component {
+    render() {
+        return (
+            <section>
+                {/* Aqui ele pega o component criado*/}
+                <FormCadastro />
+                <ListNotes />
+            </section>
+        );
+    }
 }
 
 export default App;
