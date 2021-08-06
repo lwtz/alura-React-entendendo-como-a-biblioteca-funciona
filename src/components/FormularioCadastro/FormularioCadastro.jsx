@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./estilo.css";
+import {ReactComponent as CheckSVG} from '../../assets/img/Check.svg'
 
 class FormularioCadastro extends Component {
 
@@ -47,6 +48,7 @@ class FormularioCadastro extends Component {
                     onChange={this._handlerTextArea.bind(this)}
                 />
                 <button className="form-cadastro_input form-cadastro_submit">
+                    <CheckSVG />
                     Criar Nota
                 </button>
             </form>

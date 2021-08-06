@@ -21,6 +21,19 @@ class App extends Component {
         this.setState(newState)
     }
 
+    _deletarNota(e) {
+        console.log('Deletando')
+
+        let arrayNotas = this.state.notas
+        let index = arrayNotas.indexOf(e.target.value)
+        if (index === -1) {
+            arrayNotas.splice(index, 1)
+            this.setState({notas: arrayNotas})
+        }
+
+
+        console.log(index)
+    }
 
     render() {
         return (
@@ -28,7 +41,10 @@ class App extends Component {
                 {/*  esse criarNota={} é uma propriedade que o formulário vai ter, que foi definida lá no FormularioCadastro.jsx */}
                 {/*  {this.criarNota} é uma injection of dependency  */}
                 <FormularioCadastro criarNota={this.criarNota.bind(this)} />
-                <ListaDeNotas notasList={this.state.notas} />
+                <ListaDeNotas
+                    apagarNota={this._deletarNota.bind(this)}
+                    notasList={this.state.notas}
+                />
             </section>
         )
     }
