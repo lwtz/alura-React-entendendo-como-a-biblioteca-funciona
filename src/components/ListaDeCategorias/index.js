@@ -1,3 +1,2 @@
 import ListaDeCategorias from "./ListaDeCategorias";
-
-export default ListaDeCategorias
+export default ListaDeCategorias;
