@@ -1,14 +1,31 @@
 import React, { Component } from "react";
 import "./estilo.css";
-import {ReactComponent as CheckSVG} from '../../assets/img/Check.svg'
+import { ReactComponent as CheckSVG } from '../../assets/img/Check.svg'
 
 class FormularioCadastro extends Component {
 
     constructor(props) {
         super(props);
-        // this.titulo = ''
-        this.title = {value: ''}
-        this.text = {value: ''}
+        // this.titulo = {value: '' }
+        this.title = ''
+        this.text = ''
+        this.categoria = 'Sem categoria'
+        this.state = {categorias: []}
+        this._novasCategorias = this._novasCategorias.bind(this)
+    }
+
+    componentDidMount() {
+        this.props.categorias.inscrever(this._novasCategorias)
+
+    }
+
+    componentWillUnmount() {
+        this.props.categorias.unsubscribe(this._novasCategorias)
+
+    }
+
+    _novasCategorias(categorias) {
+        this.setState({...this.state, categorias})
     }
 
     _handlerAlterTitle(event) {
@@ -26,7 +43,13 @@ class FormularioCadastro extends Component {
         event.preventDefault()
         event.stopPropagation()
 
-        this.props.criarNota(this.title, this.text)
+        this.props.criarNota(this.title, this.text, this.categoria)
+    }
+
+    _mudancaCategoria(event) {
+        event.stopPropagation()
+        this.categoria = event.target.value
+
     }
 
     render() {
@@ -34,6 +57,20 @@ class FormularioCadastro extends Component {
             <form className="form-cadastro "
                   onSubmit={this._criarNota.bind(this)}
             >
+                <select
+                    onChange={this._mudancaCategoria.bind(this)}
+                    className={'form-cadastro_input'}
+                    name="input"
+                    id="inputForm">
+                    <option value=""> Sem categoria</option>
+                    {this.state.categorias.map((cat, index) => {
+                        return (
+                            <option key={index}>
+                                {cat}
+                            </option>
+                        )
+                    })}
+                </select>
                 <input
                     type="text"
                     placeholder="Título"

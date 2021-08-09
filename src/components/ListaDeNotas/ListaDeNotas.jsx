@@ -5,25 +5,39 @@ import "./estilo.css";
 
 class ListaDeNotas extends Component {
 
-    // Nao precisa do construtor pq nao vai passar nenhum paramentro pra outro lugar
-    // Por de baixo dos panos, o JS declara esse constructor "vazio".
-    // Ai ja ta usando uma prop la em baixo
-    //
-    // constructor(props) {
-    //     super(props)
-    //
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {notas: []}
+        this._novasNotas = this._novasNotas.bind(this)
+    }
+
+    componentDidMount() {
+        this.props.notas.inscrever()
+    }
+
+
+    componentWillUnmount() {
+        this.props.notas.unsubscribe(this._novasNotas)
+
+    }
+
+    _novasNotas(notas) {
+        this.setState({...this.state, notas})
+    }
 
 
     render() {
         return (
             <ul className="lista-notas">
-                {this.props.notasList.map((nota, index) => {
+                {this.state.notas.map((nota, index) => {
                     return (
                         <li className="lista-notas_item" key={index}>
                             <CardNota
-                                apagarNota={this.props.apagarNota}
-                                title={nota.title} text={nota.text}/>
+                                e={index}
+                                apagarNota={this.state.apagarNota}
+                                title={nota.title} text={nota.text}
+                                categoria={nota.categoria}
+                            />
                         </li>
                     );
                 })}
