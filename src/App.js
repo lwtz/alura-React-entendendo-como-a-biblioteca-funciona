@@ -1,37 +1,40 @@
 import React, { Component } from "react";
 import ListaDeNotas from "./components/ListaDeNotas";
 import FormularioCadastro from "./components/FormularioCadastro";
+import ListaDeCategorias from "./components/ListaDeCategorias";
 import "./assets/App.css";
-import './assets/index.css';
-
+import "./assets/index.css";
+import Categorias from "./dados/Categorias";
+import ArrayDeNotas from "./dados/Notas";
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            notas: []
-        }
-    }
+  constructor() {
+    super();
+    this.categorias = new Categorias();
+    this.notas = new ArrayDeNotas();
+    
+  }
 
-    criarNota(title, text) {
-        const newNote = {title, text}
-        const newArrayNotes = [...this.state.notas, newNote]
-        const newState = {
-            notas: newArrayNotes
-        }
-        this.setState(newState)
-    }
-
-
-    render() {
-        return (
-            <section className="conteudo">
-                {/*  esse criarNota={} é uma propriedade que o formulário vai ter, que foi definida lá no FormularioCadastro.jsx */}
-                {/*  {this.criarNota} é uma injection of dependency  */}
-                <FormularioCadastro criarNota={this.criarNota.bind(this)} />
-                <ListaDeNotas notasList={this.state.notas} />
-            </section>
-        )
-    }
+  render() {
+    return (
+      <section className="conteudo">
+        <FormularioCadastro
+          categorias={this.categorias}
+          criarNota={this.notas.adicionarNota.bind(this.notas)}
+        />
+        <main className="conteudo-principal">
+          <ListaDeCategorias
+            adicionarCategoria={this.categorias.adicionarCategoria.bind(this.categorias)}
+            categorias={this.categorias}
+          />
+          <ListaDeNotas
+            apagarNota={this.notas.apagarNota.bind(this.notas)}
+            notas={this.notas}
+          />
+        </main>
+      </section>
+    );
+  }
 }
 
+//new ListaDeNotas({notas:this.notas})
 export default App;
